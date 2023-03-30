@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadPost } from "./Action";
 
 function App() {
-  const post = useSelector((state) => state);
+  const post = useSelector((state) => state.post);
+
+  const loading = useSelector((state) => state.loading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,9 +15,12 @@ function App() {
 
   return (
     <div className='container'>
-      {post.map((item) => {
-        return <div key={item.id}>{item.title}</div>;
-      })}
+      <h1 className='title'>Posts</h1>
+      {loading
+        ? "loading..."
+        : post.map((item) => {
+            return <div key={item.id}>{item.title}</div>;
+          })}
     </div>
   );
 }

@@ -6,12 +6,21 @@ import { applyMiddleware, createStore } from "redux";
 import "./index.css";
 import thunk from "redux-thunk";
 
-const initialState = [];
+const initialState = {
+  post: [],
+  loading: false,
+};
 
 const reduce = (state = initialState, action) => {
   switch (action.type) {
-    case "load":
-      return action.payload;
+    case "post/start":
+      return {
+        loading: true,
+      };
+    case "post/item":
+      return {
+        post: action.payload,
+      };
 
     default:
       return state;
